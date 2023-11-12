@@ -19,11 +19,13 @@ const SearchManufacturer = ({
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
-  console.log(filteredManufacturers);
-  console.log(manufacturer)
+
   return (
     <div className="search-manufacturer">
-      <Combobox value={manufacturer} onChange={setManufacturer}>
+      <Combobox
+        value={manufacturer}
+        onChange={(selectedOption) => setManufacturer(selectedOption as string)}
+      >
         <div className="relative w-full">
           <Combobox.Button className="absolute top-[14px]">
             <Image
@@ -65,8 +67,13 @@ const SearchManufacturer = ({
               filteredManufacturers.map((item) => (
                 <Combobox.Option
                   key={item}
+                  // className={({ active }) =>
+                  //   `relative search-manufacturer__option${
+                  //     active ? "bg-primary-blue text-white" : "text-gray-900"
+                  //   }`
+                  // }
                   className={({ active }) =>
-                    `relative search-manufacturer__option${
+                    `relative cursor-default select-none py-2 px-4 ${
                       active ? "bg-primary-blue text-white" : "text-gray-900"
                     }`
                   }
