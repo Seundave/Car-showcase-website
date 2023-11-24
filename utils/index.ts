@@ -1,13 +1,34 @@
 import { CarProps, FilterProps } from "@/types";
 
-export async function fetchCars(filters:FilterProps) {
-  const {manufacturer, year, model, limit, fuel} = filters
+// export async function fetchCars(filters: FilterProps) {
+//   const {manufacturer, year, model, limit, fuel} = filters
+//   const headers = {
+//     "X-RapidAPI-Key": "ed0fc791camsh49249699d1eeef9p16670ajsn8c23f70cb0f2",
+//     "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
+//   };
+
+//   const url = (`https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}}`);
+
+//   const url = "https://cars-by-api-ninjas.p.rapidapi.com/v1/cars";
+//   const response = await fetch(url, { headers: headers });
+
+//   const result = await response.json();
+
+//   console.log(response)
+
+//   console.log(result);
+
+//   return result;
+// }
+
+export async function fetchCars(filters: FilterProps) {
+  const { manufacturer, year, model, limit, fuel } = filters;
   const headers = {
     "X-RapidAPI-Key": "ed0fc791camsh49249699d1eeef9p16670ajsn8c23f70cb0f2",
     "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
   };
 
-  const url = (`https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}}`);
+  const url =  `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`;
 
   const response = await fetch(url, { headers: headers });
 
@@ -38,23 +59,21 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   const { make, year, model } = car;
 
   url.searchParams.append("customer", "hrjavascipt-mastery");
-  url.searchParams.append('make', make);
-  url.searchParams.append('modelFamily', model.split(" ")[0]);
-  url.searchParams.append('zoomType', 'fullscreen');
-  url.searchParams.append('modelYear', `${year}`);
-  url.searchParams.append('angle', `${angle}`);
+  url.searchParams.append("make", make);
+  url.searchParams.append("modelFamily", model.split(" ")[0]);
+  url.searchParams.append("zoomType", "fullscreen");
+  url.searchParams.append("modelYear", `${year}`);
+  url.searchParams.append("angle", `${angle}`);
 
-  return `${url}`
+  return `${url}`;
 };
 
-export const updateSearchParams = (type:string,value:string)=>{
+export const updateSearchParams = (type: string, value: string) => {
   const searchParams = new URLSearchParams(window.location.search);
 
-    searchParams.set(type, value);
+  searchParams.set(type, value);
 
-    const newPathname = `${
-      window.location.pathname
-    }?${searchParams.toString()}`;
-    
-    return newPathname
-}
+  const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+
+  return newPathname;
+};
